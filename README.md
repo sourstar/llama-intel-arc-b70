@@ -129,23 +129,16 @@ and the `ctx=8192` truncation policy never binds. Sizing `-c` and `-ub` for
 arrive. Any change to `-c`/`-np`/`-ub` should be argued against that number,
 and re-derived if the collection's chunker version changes.
 
-## Recommended configuration (measured 2026-08-27, NOT yet applied)
+## Deployed configuration (applied 2026-08-27)
 
-`embed-xpu-qwen3-8b.yaml` still holds the deployed configuration. This is what
-the measurements say it should be, kept separate so that file always describes
-what is actually running:
+`embed-xpu-qwen3-8b.yaml` matches what is running. It was changed from
+`-c 32768 -np 4` with oneDNN enabled, on the measurements below.
 
-```diff
-     command: >-
-       -m /models/Qwen3-Embedding-8B-Q4_K_M.gguf --embeddings --pooling last -ngl
--      999 -c 32768 -np 4 -b 8192 -ub 8192 -fa on -t 6 --metrics --host 0.0.0.0
-+      999 -c 8192 -np 1 -b 8192 -ub 8192 -fa on -t 6 --metrics --host 0.0.0.0
-       --port 8080
-+    environment:
-+      GGML_SYCL_ENABLE_DNN: "0"
-```
+Verified on the live app immediately after the change: **0 mismatches over 96
+embeddings** (24 production-length chunks x 4 passes) and **3202 tok/s** at
+client concurrency 2, p95 603ms.
 
-Against the deployed configuration, both warm, both consistency-gated:
+Against the configuration it replaced, both warm, both consistency-gated:
 
 | | tok/s | p50 | p95 | max | stored-hash stable |
 |---|---|---|---|---|---|
@@ -196,10 +189,10 @@ ceiling, so no chunk is ever sliced — which takes `-ub` out of the vector's
 identity entirely. At a smaller `-ub`, chunks longer than it slice, and slicing
 changes the bytes.
 
-Before applying, and after: `./scripts/correctness.sh`, then
-`python3 scripts/bench.py --note "..."` so `baselines/history.csv` carries a row
-on each side of the change. For the reproducibility half,
-`./scripts/hash_stability.sh`.
+`baselines/history.csv` carries a row on each side of the change. Before and
+after any further change: `./scripts/correctness.sh`, then
+`python3 scripts/bench.py --note "..."`, and `./scripts/hash_stability.sh` for
+the reproducibility half.
 
 ## Environment gotchas
 

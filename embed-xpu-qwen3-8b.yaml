@@ -2,10 +2,12 @@ services:
   llama-embed:
     command: >-
       -m /models/Qwen3-Embedding-8B-Q4_K_M.gguf --embeddings --pooling last -ngl
-      999 -c 32768 -np 4 -b 8192 -ub 8192 -fa on -t 6 --metrics --host 0.0.0.0
+      999 -c 8192 -np 1 -b 8192 -ub 8192 -fa on -t 6 --metrics --host 0.0.0.0
       --port 8080
     devices:
       - /dev/dri
+    environment:
+      GGML_SYCL_ENABLE_DNN: '0'
     healthcheck:
       interval: 30s
       retries: 3

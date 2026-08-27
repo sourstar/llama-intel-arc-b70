@@ -2,3 +2,4 @@ timestamp,note,image,concurrency,passes,chunks,total_tokens,wall_seconds,tokens_
 2026-08-27T13:33:27,"AS DEPLOYED: -c 32768 -np 4 -ub 8192, client concurrency 4",ghcr.io/ggml-org/llama.cpp:server-intel-b10630,4,3,72,64773,25.42,2548.4,1362.3,1574.1,1585.1,0
 2026-08-27T13:35:07,"RECOMMENDED: -c 8192 -np 1 -ub 8192, client concurrency 4",ghcr.io/ggml-org/llama.cpp:server-intel-b10630,4,3,72,64773,19.91,3253.0,1123.1,1157.5,1161.4,0
 2026-08-27T14:09:51,np1 c8192 ub8192 + GGML_SYCL_ENABLE_DNN=0,ghcr.io/ggml-org/llama.cpp:server-intel-b10630,4,3,72,64773,20.29,3192.4,1144.9,1183.2,1185.2,0
+2026-08-27T23:48:45,"LIVE: -c 8192 -np 1 -ub 8192 + DNN=0, post-apply",ghcr.io/ggml-org/llama.cpp:server-intel-b10630,2,3,72,64773,20.23,3202.1,568.5,603.4,607.2,0
