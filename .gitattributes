@@ -1,2 +1,15 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# These run on the TrueNAS host. CRLF breaks them two ways: the shebang
+# becomes "/usr/bin/env bash\r" (bad interpreter), and `source config.env`
+# puts a trailing \r inside every variable, so IMAGE and PROD_URL are silently
+# wrong. Pin them to LF regardless of the checkout platform.
+*.sh text eol=lf
+*.py text eol=lf
+*.yaml text eol=lf
+config.env text eol=lf
+
+# Fixture pools are the gate's definition of "identical input". Keep them
+# byte-stable across checkouts.
+*.json text eol=lf

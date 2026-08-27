@@ -1,0 +1,17 @@
+# The gate and bench pools ARE committed: the gate is only meaningful if every
+# run embeds byte-identical input, so they have to be in the repo.
+#
+# The trial pools are not. They are large (scale.json is 19 MB) and exactly
+# regenerable — build_scale_pool.py takes a fixed --seed and make_fixtures.py
+# --lengths is deterministic — so committing them would trade megabytes for
+# nothing. The commands are in KNOWN-ISSUES F.
+fixtures/scale.json
+fixtures/sweep.json
+
+# Per-run working directories: captures are ~1.3 MB each and a sweep makes
+# dozens. The results.csv and the summary logs are what matter, and those are
+# small enough to keep.
+baselines/matrix-*/
+baselines/concurrency-*/
+baselines/repro-*/
+baselines/hash-stability-*/

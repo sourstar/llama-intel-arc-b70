@@ -1,0 +1,7 @@
+timestamp,note,image,concurrency,passes,chunks,total_tokens,wall_seconds,tokens_per_second,p50_ms,p95_ms,max_ms,errors
+2026-08-27T11:07:23,"b10630 baseline, deployed config (-c 32768 -np 4 -ub 8192)",ghcr.io/ggml-org/llama.cpp:server-intel-b10630,4,3,24,81216,38.15,2129.0,4910.9,12191.0,12960.4,0
+2026-08-27T11:08:41,"A/B: -ub 2048, otherwise identical to deployed (-c 32768 -np 4)",ghcr.io/ggml-org/llama.cpp:server-intel-b10630,4,3,24,81216,32.53,2496.9,2802.2,9084.5,31026.5,0
+2026-08-27T11:09:35,ub=8192 rep2,ghcr.io/ggml-org/llama.cpp:server-intel-b10630,4,3,24,81216,37.86,2144.9,5268.4,11707.1,13677.4,0
+2026-08-27T11:10:05,ub=2048 rep2,ghcr.io/ggml-org/llama.cpp:server-intel-b10630,4,3,24,81216,28.84,2816.5,2875.8,7406.4,28180.4,0
+2026-08-27T11:10:44,ub=8192 rep3,ghcr.io/ggml-org/llama.cpp:server-intel-b10630,4,3,24,81216,38.03,2135.8,5304.1,11743.0,13728.6,0
+2026-08-27T11:11:13,ub=2048 rep3,ghcr.io/ggml-org/llama.cpp:server-intel-b10630,4,3,24,81216,28.89,2811.4,2731.6,7420.3,28218.1,0
